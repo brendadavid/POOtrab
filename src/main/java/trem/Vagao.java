@@ -11,4 +11,9 @@ public class Vagao extends CarroFerroviario {
         return String.format("Vagao{id=%d, cargaMaxima=%s, composicao=%d}",
             super.getId(), super.getCargaMaxima(), super.getComposicao());
     }
+
+    @Override
+    public void listar() {
+        System.out.println(this.toString());
+    }
 }

@@ -26,10 +26,10 @@ public class Composicao {
         if (bloqueado) {
             return false;
         } else {
-            carros.add(loc);
             addVagoesMaximos(loc.getVagoesMaximos());
             addCargaMaxima(loc.getCargaMaxima());
             loc.setComposicao(id);
+            carros.add(loc);
             return true;
         }
     }
@@ -49,7 +49,7 @@ public class Composicao {
 
     private void addVagoesMaximos(int vagoesMaximos) {
         this.vagoesDisponiveisBruto += vagoesMaximos;
-        if (vagoesMaximos > 1) {
+        if (carros.size() > 1) {
             this.vagoesDisponiveis = (int) (this.vagoesDisponiveisBruto * 0.9);
         } else {
             this.vagoesDisponiveis = this.vagoesDisponiveisBruto;
@@ -60,7 +60,7 @@ public class Composicao {
         this.cargaDisnivel += cargaMaxima;
     }
 
-    private CarroFerroviario desengatar() {
+    public Integer desengatar() {
         if (carros.size() > 1) {
             CarroFerroviario carro = carros.remove(carros.size() - 1);
             carro.setComposicao(null);
@@ -71,7 +71,7 @@ public class Composicao {
                     bloqueado = false;
                 }
             }
-            return carro;
+            return carro.getId();
         } else {
             return null;
         }
@@ -101,13 +101,16 @@ public class Composicao {
                 "bloqueado=%s, " +
                 "vagoesDisponiveisBruto=%d, " +
                 "vagoesDisponiveis=%d, " +
-                "cargaDisnivel=%s, " +
-                "carros=\n%s\n}",
+                "cargaDisnivel=%s}",
             id,
             bloqueado,
             vagoesDisponiveisBruto,
             vagoesDisponiveis,
-            cargaDisnivel,
-            carros);
+            cargaDisnivel);
+    }
+
+    public void listar() {
+        System.out.println(this.toString());
+        carros.forEach(CarroFerroviario::listar);
     }
 }

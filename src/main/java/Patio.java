@@ -48,6 +48,36 @@ public class Patio {
         }
     }
 
+    public Locomotiva buscaLocomotiva(int id){
+        return (Locomotiva) carrosFerroviarios.stream()
+            .filter(carro -> carro instanceof Locomotiva)
+            .filter(carro -> id == carro.getId())
+            .findFirst()
+            .orElseThrow(() -> new RuntimeException("Locomotiva não encontrada"));
+    }
+
+    public Vagao buscaVagao(int id){
+        return (Vagao) carrosFerroviarios.stream()
+            .filter(carro -> carro instanceof Vagao)
+            .filter(carro -> id == carro.getId())
+            .findFirst()
+            .orElseThrow(() -> new RuntimeException("Vagão não encontrado"));
+    }
+
+    public void listarLocomotivasDisponiveis(){
+        carrosFerroviarios.stream()
+            .filter(carro -> carro instanceof Locomotiva)
+            .filter(carro -> carro.getComposicao() == null)
+            .forEach(System.out::println);
+    }
+
+    public void listarVagoesDisponiveis(){
+        carrosFerroviarios.stream()
+            .filter(carro -> carro instanceof Vagao)
+            .filter(carro -> carro.getComposicao() == null)
+            .forEach(System.out::println);
+    }
+
     public List<CarroFerroviario> getCarrosFerroviarios() {
         return carrosFerroviarios;
     }
@@ -55,5 +85,10 @@ public class Patio {
     @Override
     public String toString() {
         return String.format("Patio{carrosFerroviarios=\n%s\n}", carrosFerroviarios);
+    }
+
+    public void listar() {
+        System.out.println("Carros do Patio:");
+        carrosFerroviarios.forEach(CarroFerroviario::listar);
     }
 }

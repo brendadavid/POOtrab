@@ -22,5 +22,10 @@ public class Locomotiva extends CarroFerroviario {
         return String.format("Locomotiva{vagoesMaximos=%d id=%d, cargaMaxima=%s, composicao=%d}",
             this.getVagoesMaximos(), super.getId(), super.getCargaMaxima(), super.getComposicao());
     }
+
+    @Override
+    public void listar() {
+        System.out.println(this.toString());
+    }
 }
 

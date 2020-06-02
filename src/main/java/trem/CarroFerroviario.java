@@ -39,4 +39,6 @@ public abstract class CarroFerroviario {
     public String toString() {
         return String.format("CarroFerroviario{id=%d, cargaMaxima=%s, composicao=%d}", id, cargaMaxima, composicao);
     }
+
+    public abstract void listar();
 }
